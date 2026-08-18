@@ -1,0 +1,23 @@
+{{ define "main" }}
+<style>
+.spis-hasel h1 { margin-bottom: 1.5rem; }
+.spis-hasel h2 { margin-left: 0; }
+.spis-hasel ul { list-style: none; margin: 0 0 1.5rem 2rem; padding: 0; }
+.spis-hasel li { margin-bottom: 0.3rem; }
+</style>
+
+<div class="spis-hasel">
+<h1>{{ .Title }}</h1>
+
+{{ range .Pages.GroupByParam "litera" "asc" }}
+  <h2 id="litera-{{ .Key | lower }}">{{ .Key }}</h2>
+  <ul>
+  {{ range .Pages.ByTitle }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+  {{ end }}
+  </ul>
+{{ end }}
+</div>
+{{ end }}

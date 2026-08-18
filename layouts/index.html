@@ -1,0 +1,22 @@
+{{- define "main" }}
+
+{{- if .Content }}
+<div class="post-content md-content">
+  {{- partial "anchored_headings.html" .Content -}}
+</div>
+{{- end }}
+
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $sciezka := sort $pages "Params.kolejnosc" "asc" }}
+
+<ol class="sciezka-lista">
+  {{- range $sciezka }}
+  <li>
+    <a href="{{ .Permalink }}"><strong>{{ .Title }}</strong></a>
+    <p>{{ .Summary | plainify | htmlUnescape }}</p>
+    {{ if .Truncated }}<p><a href="{{ .Permalink }}">czytaj dalej →</a></p>{{ end }}
+  </li>
+  {{- end }}
+</ol>
+
+{{- end }}

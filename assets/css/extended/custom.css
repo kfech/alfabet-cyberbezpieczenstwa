@@ -1,0 +1,16 @@
+.entry-content {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+}
+.sciezka-lista {
+    padding-left: 1.5rem;
+}
+.sciezka-lista li {
+    margin-bottom: 1.5rem;
+    font-size: 18px;
+}
+.sciezka-lista li p {
+    font-size: 14px;
+    color: var(--secondary);
+}

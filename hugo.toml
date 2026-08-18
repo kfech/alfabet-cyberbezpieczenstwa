@@ -1,0 +1,15 @@
+baseURL = 'https://alfabetcyberbezpieczenstwa.pl/'
+locale = 'pl-pl'
+title = 'Alfabet Cyberbezpieczeństwa'
+theme = 'PaperMod'
+[menu]
+  [[menu.main]]
+    name = "Spis haseł"
+    url = "/hasla/"
+    weight = 10
+  [[menu.main]]
+    name = "O projekcie"
+    url = "/o-projekcie/"
+    weight = 20
+[params]
+  disableSpecial1stPost = true
