@@ -10,6 +10,13 @@ theme = 'PaperMod'
   [[menu.main]]
     name = "O projekcie"
     url = "/o-projekcie/"
+    weight = 15
+[[menu.main]]
+    name = "O mnie"
+    url = "/o-mnie/"
     weight = 20
 [params]
   disableSpecial1stPost = true
+  defaultTheme = "light"
+[markup.goldmark.renderer]
+  unsafe = true

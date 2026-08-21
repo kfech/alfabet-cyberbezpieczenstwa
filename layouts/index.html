@@ -1,22 +1,55 @@
 {{- define "main" }}
-
 {{- if .Content }}
 <div class="post-content md-content">
   {{- partial "anchored_headings.html" .Content -}}
 </div>
 {{- end }}
 
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $sciezka := sort $pages "Params.kolejnosc" "asc" }}
+{{- $strony := dict }}
+{{- range where .Site.RegularPages "Section" "hasla" }}
+  {{- $strony = merge $strony (dict .File.BaseFileName .) }}
+{{- end }}
 
-<ol class="sciezka-lista">
-  {{- range $sciezka }}
-  <li>
-    <a href="{{ .Permalink }}"><strong>{{ .Title }}</strong></a>
-    <p>{{ .Summary | plainify | htmlUnescape }}</p>
-    {{ if .Truncated }}<p><a href="{{ .Permalink }}">czytaj dalej →</a></p>{{ end }}
-  </li>
+{{- $haslaData := slice }}
+{{- range .Site.Data.sciezka.rozdzialy }}
+  {{- $rid := .id }}
+  {{- range .hasla }}
+    {{- $slug := . }}
+    {{- $page := index $strony $slug }}
+    {{- $item := dict
+        "id" $slug
+        "rozdzial" $rid
+        "istnieje" (cond $page true false)
+        "tytul" (cond $page $page.Title $slug)
+        "url" (cond $page $page.RelPermalink "")
+        "litera" (index $.Site.Data.mapa_liter $slug)
+    }}
+    {{- $haslaData = $haslaData | append $item }}
   {{- end }}
-</ol>
+{{- end }}
 
+{{- $rozdzialyOut := slice }}
+{{- range .Site.Data.sciezka.rozdzialy }}
+  {{- $out := dict
+      "id" .id
+      "tytul" .tytul
+      "wymaga" (.wymaga | default slice)
+      "odblokowanie" (.odblokowanie | default "")
+      "typ" (.typ | default "")
+      "prog_co" (.prog_co | default 0)
+      "licznik_z" (.licznik_z | default slice)
+  }}
+  {{- $rozdzialyOut = $rozdzialyOut | append $out }}
+{{- end }}
+
+<script type="application/json" id="dane-hasla">{{ $haslaData | jsonify | safeJS }}</script>
+<script type="application/json" id="dane-rozdzialy">{{ $rozdzialyOut | jsonify | safeJS }}</script>
+<script type="application/json" id="dane-litery">{{ .Site.Data.litery | jsonify | safeJS }}</script>
+
+<div class="plansza" id="plansza-root">
+  <div class="plansza-board" id="plansza-board"></div>
+  <div class="plansza-panel" id="plansza-panel"></div>
+</div>
+
+<script src="/js/plansza.js" defer></script>
 {{- end }}

@@ -1,0 +1,54 @@
+rozdzialy:
+  - id: start
+    tytul: "Start"
+    odblokowanie: zawsze
+    hasla: [internet]
+
+  - id: urzadzenie
+    tytul: "Urządzenie"
+    wymaga: [start]
+    hasla: [urzadzenie, system-operacyjny, firmware, dane]
+
+  - id: aplikacje
+    tytul: "Aplikacje"
+    wymaga: [urzadzenie]
+    hasla: [aplikacje, konto, regulamin, media-spolecznosciowe, komunikatory, e-mail]
+
+  - id: zagrozenia
+    tytul: "Zagrożenia"
+    wymaga: [aplikacje]
+    hasla: [malware, wirus, trojan, ransomware, gang-ransomware, backdoor, botnet, keylogger, exploit, luka, cyberatak, cyberprzestepca, haker]
+
+  - id: manipulacja
+    tytul: "Manipulacja i Ty"
+    wymaga: [aplikacje]
+    hasla: [socjotechnika, phishing, smishing, spam, spoofing, clickbait, fake, deepfake, dezinformacja, fact-checking, teorie-spiskowe, oszustwa, hejt, troll, stalking, ciasteczka, sledzenie, browser-fingerprint, geolokalizacja, cyfrowy-slad, broker-danych, banka-informacyjna, anonimizacja-danych, vpn, adblocker, prywatnosc, anonimowosc]
+
+  - id: ochrona
+    tytul: "Ochrona"
+    typ: prog
+    prog_co: 2
+    licznik_z: [zagrozenia, manipulacja]
+    hasla: [haslo, latwe-hasla, menedzer-hasel, mfa, aktualizacje, latka, antywirus, edr, zapora, filtr-rodzicielski, backup, bitlocker, szyfrowanie, blokada-ekranu]
+
+  - id: slownik
+    tytul: "Słownik podstawowy"
+    typ: prog
+    prog_co: 2
+    licznik_z: [zagrozenia, manipulacja]
+    hasla: [cyberbezpieczenstwo, cyberhigiena, odpornosc-cyfrowa]
+
+  - id: dane-prawa
+    tytul: "Twoje dane i prawa"
+    wymaga: [ochrona, slownik]
+    hasla: [dane-osobowe, wyciek-danych, rodo, kradziez-tozsamosci, kradziez-wlasnosci]
+
+  - id: dobrostan
+    tytul: "Dobrostan cyfrowy"
+    wymaga: [dane-prawa]
+    hasla: [uzaleznienie, petla-dopaminowa, fomo, przeciazenie-informacyjne, netykieta]
+
+  - id: warto-znac
+    tytul: "Warto znać"
+    wymaga: [dobrostan]
+    hasla: [cert-polska, jailbreak, kryptografia, kryptowaluta, sztuczna-inteligencja, osint, opsec, reverse-engineering, grapheneos, mobywatel, certyfikat, chmura, awatar, influencer, korelacja-danych, gaming, viral, ip]
